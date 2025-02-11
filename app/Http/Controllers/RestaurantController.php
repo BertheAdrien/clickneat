@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Restaurant;
 use App\Models\Category;
+use App\Models\Item;
 
 class RestaurantController extends Controller
 {
@@ -35,7 +36,8 @@ class RestaurantController extends Controller
     public function show($id)
     {
         return view('restaurants.show', [
-            'restaurant' => Restaurant::findOrFail($id)
+            'restaurant' => Restaurant::findOrFail($id),
+            'restaurants' => Restaurant::with('categories.items')->get(),
         ]);
     }
 

@@ -19,5 +19,14 @@
         <li><a href="{{ route('categories.show', $category->id) }}" title="Voir la category">{{ $category->name }}</a></li>
         @endforeach
     </ul>
+
+    <h2>Items</h2>
+    <ul>
+        @foreach($restaurant->categories as $category)
+            @foreach($category->items as $item)
+                <li><a href="{{ route('items.show', $item->id) }}" title="Voir l'item">{{ $item->name }}</a></li>
+            @endforeach
+        @endforeach
+    </ul>
     
 @endsection
