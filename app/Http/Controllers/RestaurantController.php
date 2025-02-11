@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Restaurant;
+use App\Models\Category;
 
 class RestaurantController extends Controller
 {
@@ -11,7 +12,7 @@ class RestaurantController extends Controller
     {
 
         return view('restaurants.index', [
-            'restaurants' => Restaurant::all()
+            'restaurants' => Restaurant::with('categories')->get()
         ]);
     }
 
@@ -22,7 +23,12 @@ class RestaurantController extends Controller
 
     public function store(Request $request)
     {
-        Restaurant::create($request->all());
+        $restaurant = new Restaurant();
+
+        $restaurant->name = $request->get('name');
+        
+        $restaurant->save();
+    
         return redirect()->route('restaurants.index');
     }
 

@@ -32,4 +32,3 @@ class ItemFactory extends Factory
         ];
     }
 }
-

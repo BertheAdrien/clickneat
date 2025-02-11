@@ -4,25 +4,35 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Restaurant;
 
 class CategoryController extends Controller
 {
     public function index()
     {
         return view('categories.index', [
-            'categories' => Category::all()
+            'categories' => Category::with('restaurant')->get()
         ]);
     }
 
     public function create()
     {
-        return view('categories.create');
+        return view('categories.create', [
+            'restaurants' => Restaurant::with('categories')->get()
+        ]);
     }
 
     public function store(Request $request)
     {
-        Category::create($request->all());
-        return redirect()->route('categories.index');
+
+    $category = new Category();
+
+    $category->name = $request->get('name');
+    $category->restaurant_id = $request->get('restaurant_id');
+    
+    $category->save();
+
+    return redirect()->route('categories.index');
     }
 
     public function show($id)
@@ -35,14 +45,19 @@ class CategoryController extends Controller
     public function edit($id)
     {
         return view('categories.edit', [
-            'category' => Category::findOrFail($id)
+            'category' => Category::findOrFail($id),
+            'restaurants' => Restaurant::with('categories')->get()
         ]);
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         $category = Category::findOrFail($id);
-        $category->update($request->all());
+
+        $category->name = $request->get('name');
+        $category->restaurant_id = $request->get('restaurant_id');
+
+        $category->save();
+
         return redirect()->route('categories.index');
     }
 

@@ -15,11 +15,11 @@ class Item extends Model
         "name",
         "category_id",
         "cost",
-        "price"
+        "price" 
     ];
 
-    public function categories()
+    public function category()
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsTo(Category::class);
     }
 }
