@@ -2,9 +2,16 @@
 <html lang="en">
 @include('layout.head')
 <body>
+    @include('layout.topbar')
+    @include('layout.sidebar')
+ 
+    <div class="page-wrapper">
+        @yield('main')
+    </div>
     
-    @yield('main')
 
-    @yield('scripts')
+    @include('layout.scripts')
+
 </body>
 </html>
+
