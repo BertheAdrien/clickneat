@@ -2,7 +2,7 @@
 
 @section('main')
     
-    <h1>Dashboard</h1>
+    <h1>Dashboard salut</h1>
     @endSection
 
 

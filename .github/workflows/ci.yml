@@ -32,28 +32,28 @@ jobs:
           git pull
           
           # Créer les dossiers nécessaires s'ils n'existent pas
-          mkdir -p vendor
-          mkdir -p bootstrap/cache
-          mkdir -p storage/logs
-          mkdir -p storage/framework/cache
-          mkdir -p storage/framework/sessions
-          mkdir -p storage/framework/views
+          # mkdir -p vendor
+          # mkdir -p bootstrap/cache
+          # mkdir -p storage/logs
+          # mkdir -p storage/framework/cache
+          # mkdir -p storage/framework/sessions
+          # mkdir -p storage/framework/views
           
           # Installer composer si nécessaire
-          if ! [ -x "$(command -v composer)" ]; then
-            curl -sS https://getcomposer.org/installer | php
-            sudo mv composer.phar /usr/local/bin/composer
-          fi
+          # if ! [ -x "$(command -v composer)" ]; then
+          #   curl -sS https://getcomposer.org/installer | php
+          #   sudo mv composer.phar /usr/local/bin/composer
+          # fi
           
           # Installer les dépendances
           composer install --no-dev --optimize-autoloader
           
           # Corriger les permissions pour le serveur web
-          sudo chown -R www-data:www-data .
-          sudo chmod -R 775 storage bootstrap/cache vendor
+          # sudo chown -R www-data:www-data .
+          # sudo chmod -R 775 storage bootstrap/cache vendor
           
-          # Assurer que les scripts artisan sont exécutables
-          sudo chmod +x artisan
+          # # Assurer que les scripts artisan sont exécutables
+          # sudo chmod +x artisan
           
           # Exécuter les commandes Laravel avec le bon utilisateur
           sudo -u www-data php artisan config:clear
