@@ -2,7 +2,7 @@
 
 @section('main')
     
-    <h1>Dashboard slut matis</h1>
+    <h1>Dashboard</h1>
     @endSection
 
 
