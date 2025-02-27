@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 @section('main')
-    <h1>Restaurants a to</h1>
+    <h1>Restaurants o</h1>
 
     <a href="{{ route('restaurants.create') }}">Créer un restaurant</a>
 
