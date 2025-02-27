@@ -6,7 +6,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\DashboardController;
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
 Route::get('/restaurants', [RestaurantController::class, 'index'])->name('restaurants.index');
 Route::get('/restaurants/create', [RestaurantController::class, 'create'])->name('restaurants.create');
