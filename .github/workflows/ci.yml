@@ -16,17 +16,37 @@ jobs:
         password: ${{ secrets.SERVER_PASSWORD }}
         script: |
           cd ${{ secrets.PROJECT_PATH }}
-
-            # Corriger les permissions des dossiers critiques
-            sudo chown -R www-data:www-data storage bootstrap/cache
-            sudo chmod -R 775 storage bootstrap/cache
-
-            # Continuer avec le reste du déploiement
-            git pull
-            composer install --no-dev --optimize-autoloader
-            php artisan config:cache
-            php artisan route:cache
-            php artisan view:clear
-            php artisan migrate --force
-
-
+          
+          # Stash any local changes
+          git stash
+          
+          # Reset file permissions before pull
+          sudo find . -type f -exec chmod 664 {} \;
+          sudo find . -type d -exec chmod 775 {} \;
+          
+          # Nettoyer les dossiers problématiques
+          sudo rm -rf vendor
+          sudo rm -rf bootstrap/cache/*
+          
+          # Pull les derniers changements
+          git pull
+          
+          # Installer les dépendances
+          composer install --no-dev --optimize-autoloader
+          
+          # Corriger les permissions après installation
+          sudo chown -R www-data:www-data .
+          sudo chmod -R 775 storage bootstrap/cache vendor
+          
+          # Vider les caches d'abord
+          php artisan config:clear
+          php artisan route:clear
+          php artisan view:clear
+          php artisan cache:clear
+          
+          # Puis recréer les caches
+          php artisan config:cache
+          php artisan route:cache
+          
+          # Migrations
+          php artisan migrate --force
