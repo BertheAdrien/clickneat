@@ -15,38 +15,58 @@ jobs:
         username: ${{ secrets.SERVER_USERNAME }}
         password: ${{ secrets.SERVER_PASSWORD }}
         script: |
-          cd ${{ secrets.PROJECT_PATH }}
+          # Créer un script de déploiement
+          cat > /tmp/deploy.sh << 'EOL'
+          #!/bin/bash
+          set -e
           
-          # Stash any local changes
+          PROJECT_DIR="${{ secrets.PROJECT_PATH }}"
+          cd $PROJECT_DIR
+          
+          # Corriger les permissions du dossier .git et du projet entier
+          sudo chown -R $(whoami):$(whoami) .
+          
+          # Maintenant nous pouvons utiliser git
           git stash
-          
-          # Reset file permissions before pull
-          sudo find . -type f -exec chmod 664 {} \;
-          sudo find . -type d -exec chmod 775 {} \;
-          
-          # Nettoyer les dossiers problématiques
-          sudo rm -rf vendor
-          sudo rm -rf bootstrap/cache/*
-          
-          # Pull les derniers changements
+          git reset --hard
           git pull
+          
+          # Créer les dossiers nécessaires s'ils n'existent pas
+          mkdir -p vendor
+          mkdir -p bootstrap/cache
+          mkdir -p storage/logs
+          mkdir -p storage/framework/cache
+          mkdir -p storage/framework/sessions
+          mkdir -p storage/framework/views
+          
+          # Installer composer si nécessaire
+          if ! [ -x "$(command -v composer)" ]; then
+            curl -sS https://getcomposer.org/installer | php
+            sudo mv composer.phar /usr/local/bin/composer
+          fi
           
           # Installer les dépendances
           composer install --no-dev --optimize-autoloader
           
-          # Corriger les permissions après installation
+          # Corriger les permissions pour le serveur web
           sudo chown -R www-data:www-data .
           sudo chmod -R 775 storage bootstrap/cache vendor
           
-          # Vider les caches d'abord
-          php artisan config:clear
-          php artisan route:clear
-          php artisan view:clear
-          php artisan cache:clear
+          # Assurer que les scripts artisan sont exécutables
+          sudo chmod +x artisan
           
-          # Puis recréer les caches
-          php artisan config:cache
-          php artisan route:cache
+          # Exécuter les commandes Laravel avec le bon utilisateur
+          sudo -u www-data php artisan config:clear
+          sudo -u www-data php artisan route:clear
+          sudo -u www-data php artisan view:clear
+          sudo -u www-data php artisan cache:clear
+          sudo -u www-data php artisan config:cache
+          sudo -u www-data php artisan route:cache
+          sudo -u www-data php artisan migrate --force
+          EOL
           
-          # Migrations
-          php artisan migrate --force
+          # Rendre le script exécutable
+          chmod +x /tmp/deploy.sh
+          
+          # Exécuter le script
+          sudo /tmp/deploy.sh
