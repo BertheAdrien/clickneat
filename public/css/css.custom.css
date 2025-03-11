@@ -1,0 +1,17 @@
+      /* Étendre le fond sur toute la page */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      .main-wrapper {
+        height: 100%; /* Prendre toute la hauteur */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #343a40; /* Couleur de fond sombre */
+      }
+      .auth-wrapper {
+        width: 100%;
+        max-width: 500px; /* Largeur maximale du formulaire */
+      }
