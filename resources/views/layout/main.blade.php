@@ -9,8 +9,8 @@
         @yield('main')
     </div>
     
+    @yield('scripts')
 
-    @include('layout.scripts')
 
 </body>
 </html>

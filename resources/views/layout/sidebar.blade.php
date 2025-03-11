@@ -37,7 +37,7 @@
               href="{{ route('items.index') }}"
               aria-expanded="false"
               ><i class="mdi mdi-border-inside"></i
-              ><span class="hide-menu">Items</span></a
+              ><span class="hide-menu">Tables</span></a
             >
           </li>
           <li class="sidebar-item">
