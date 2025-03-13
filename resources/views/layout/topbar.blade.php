@@ -79,6 +79,7 @@
                   ><i class="mdi mdi-menu font-24"></i
                 ></a>
               </li>
+
               <!-- ============================================================== -->
               <!-- create new -->
               <!-- ============================================================== -->
@@ -107,6 +108,7 @@
                   </li>
                 </ul>
               </li>
+              
               <!-- ============================================================== -->
               <!-- Search -->
               <!-- ============================================================== -->
@@ -315,9 +317,13 @@
                     Setting</a
                   >
                   <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" href="javascript:void(0)"
-                    ><i class="fa fa-power-off me-1 ms-1"></i> Logout</a
-                  >
+                  <a href="#" class="dropdown-item" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                    <i class="fa fa-power-off me-1 ms-1"></i> Logout
+                </a>
+                
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
                   <div class="dropdown-divider"></div>
                   <div class="ps-4 p-10">
                     <a

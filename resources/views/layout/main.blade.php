@@ -10,6 +10,7 @@
     </div>
     
     @yield('scripts')
+    @include('layout.scripts')
 
 
 </body>

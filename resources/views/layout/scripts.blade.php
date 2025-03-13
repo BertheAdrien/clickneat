@@ -20,3 +20,12 @@
 <script src="{{asset('libs/flot/jquery.flot.crosshair.js')}}"></script>
 <script src="{{asset('libs/flot.tooltip/js/jquery.flot.tooltip.min.js')}}"></script>
 <script src="{{asset('js/pages/chart/chart-page-init.js')}}"></script>
+
+<script>
+    console.log("scripts !");
+    
+  /****************************************
+   *       Basic Table                   *
+   ****************************************/
+  $("#zero_config").DataTable();
+</script>
