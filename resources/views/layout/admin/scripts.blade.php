@@ -21,6 +21,10 @@
 <script src="{{asset('libs/flot.tooltip/js/jquery.flot.tooltip.min.js')}}"></script>
 <script src="{{asset('js/pages/chart/chart-page-init.js')}}"></script>
 
+<script src="{{ asset('libs/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('extra-libs/multicheck/datatable-checkbox-init.js') }}"></script>
+<script src="{{ asset('extra-libs/multicheck/jquery.multicheck.js') }}"></script>
+<script src="{{ asset('extra-libs/DataTables/datatables.min.js') }}"></script>
 <script>
     console.log("scripts !");
     

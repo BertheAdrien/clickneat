@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        return $this->redirectBasedOnRole();
     }
 
     /**
@@ -42,6 +42,19 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('dashboard.index');
+        return redirect()->route('dashboard.client');
+    }
+
+    protected function redirectBasedOnRole(): RedirectResponse
+    {
+        $user = Auth::user();
+
+        if ($user->role === 'admin') {
+            return redirect()->route('dashboard.admin');
+        } elseif ($user->role === 'restaurant') {
+            return redirect()->route('dashboard.restaurant');
+        } else {
+            return redirect()->route('dashboard.client'); // Par défaut, pour les clients
+        }
     }
 }

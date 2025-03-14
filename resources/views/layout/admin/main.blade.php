@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-@include('layout.head')
+@include('layout.admin.head')
 <body>
-    @include('layout.topbar')
-    @include('layout.sidebar')
+    @include('layout.admin.topbar')
+    @include('layout.admin.sidebar')
  
     <div class="page-wrapper">
         @yield('main')
     </div>
     
     @yield('scripts')
-    @include('layout.scripts')
+    @include('layout.admin.scripts')
 
 
 </body>
