@@ -53,8 +53,9 @@ class AuthenticatedSessionController extends Controller
             return redirect()->route('dashboard.admin');
         } elseif ($user->role === 'restaurant') {
             return redirect()->route('dashboard.restaurant');
-        } else {
-            return redirect()->route('dashboard.client'); // Par défaut, pour les clients
+        } elseif ($user->role === 'client') {
+            return redirect()->route('dashboard.client');
         }
+        return redirect()->route('home');
     }
 }

@@ -8,7 +8,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\DashboardController;
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', [DashboardController::class, 'client'])->name('dashboard.client');
+    Route::get('/', [DashboardController::class, 'client'])->name('home');
     Route::get('/dashboard/admin', [DashboardController::class, 'admin'])->name('dashboard.admin');
     Route::get('/dashboard/restaurant', [DashboardController::class, 'restaurant'])->name('dashboard.restaurant');
     Route::get('/dashboard/client', [DashboardController::class, 'client'])->name('dashboard.client');
