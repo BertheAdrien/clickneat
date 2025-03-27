@@ -31,6 +31,9 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nom</th>
+                                    <th>Categorie</th>
+                                    <th>Prix</th>
+                                    <th>Coût</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -39,6 +42,9 @@
                                     <tr>
                                         <td>{{ $item->id }}</td>
                                         <td>{{ $item->name }}</td>
+                                        <td>{{ $item->category->name }}</td>
+                                        <td>{{ $item->price }}</td>
+                                        <td>{{ $item->cost }}</td>
                                         <td>
                                             <div style="display: flex;">
                                                 <a class="btn btn-outline-success" style="margin-right: 8px;" href="{{ route('items.show', $item->id) }}">Voir</a>
