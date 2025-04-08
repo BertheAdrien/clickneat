@@ -36,16 +36,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/items/edit/{id}', [ItemController::class, 'edit'])->name('items.edit');
     Route::put('/items/update/{id}', [ItemController::class, 'update'])->name('items.update');
     Route::delete('/items/destroy/{id}', [ItemController::class, 'destroy'])->name('items.destroy');
+
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    
 });
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
 require __DIR__.'/auth.php';
