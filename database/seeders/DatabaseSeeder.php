@@ -36,20 +36,17 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('Pokemon72380'),
         ]);
 
-        // 10 clients
         User::factory(10)->create([
             'role' => 'client',
             'password' => Hash::make('Pokemon72380'),
         ]);
 
-        // 10 restaurants
-        Restaurant::factory(10)->create();
+        //combien de lignes à créer
+        Restaurant::factory(25)->create();
 
-        // 10 categories
-        Category::factory(10)->create();
+        Category::factory(80)->create();
 
-        // 30 items
-        Item::factory(30)->create();
+        Item::factory(200)->create();
     }
 
 

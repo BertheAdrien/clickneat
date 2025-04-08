@@ -18,7 +18,7 @@ class CategoryFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'restaurant_id' => random_int(1, 10)
+            'restaurant_id' => random_int(1, 25)
             // 'created_at' => now(),
         ];
     }
