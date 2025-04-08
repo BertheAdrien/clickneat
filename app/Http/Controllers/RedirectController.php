@@ -13,7 +13,7 @@ class RedirectController extends Controller
         return match ($user->role) {
             'admin' => redirect()->route('dashboard.admin'),
             'restaurant' => redirect()->route('dashboard.restaurant'),
-            'client' => redirect()->route('dashboard.client'),
+            'client' => redirect()->route('client.dashboard'),
             default => abort(403, 'Rôle inconnu.'),
         };
     }

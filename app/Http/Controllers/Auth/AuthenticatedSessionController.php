@@ -42,7 +42,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect()->route('dashboard.client');
+        return redirect()->route('client.dashboard');
     }
 
     protected function redirectBasedOnRole(): RedirectResponse
@@ -54,7 +54,7 @@ class AuthenticatedSessionController extends Controller
         } elseif ($user->role === 'restaurant') {
             return redirect()->route('dashboard.restaurant');
         } elseif ($user->role === 'client') {
-            return redirect()->route('dashboard.client');
+            return redirect()->route('client.dashboard');
         }
         return redirect()->route('home');
     }

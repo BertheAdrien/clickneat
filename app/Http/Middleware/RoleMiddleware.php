@@ -16,7 +16,7 @@ class RoleMiddleware
 
         if (Auth::user()->role !== $role) {
             return match (Auth::user()->role) {
-                'client' => redirect()->route('dashboard.client'),
+                'client' => redirect()->route('client.dashboard'),
                 'restaurant' => redirect()->route('dashboard.restaurant'),
                 'admin' => redirect()->route('dashboard.admin'),
                 default => abort(403, 'Rôle inconnu'),

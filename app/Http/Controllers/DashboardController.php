@@ -30,6 +30,6 @@ class DashboardController extends Controller
 
     public function client()
     {
-        return view('dashboard.client');
+        return view('client.dashboard');
     }
 }
