@@ -6,12 +6,13 @@ use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\RedirectController;
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', [DashboardController::class, 'client'])->name('home');
-    Route::get('/dashboard/admin', [DashboardController::class, 'admin'])->name('dashboard.admin');
-    Route::get('/dashboard/restaurant', [DashboardController::class, 'restaurant'])->name('dashboard.restaurant');
-    Route::get('/dashboard/client', [DashboardController::class, 'client'])->name('dashboard.client');
+    Route::middleware('auth')->get('/', [RedirectController::class, 'handle'])->name('home');
+    Route::middleware('role:admin')->get('/dashboard/admin', [DashboardController::class, 'admin'])->name('dashboard.admin');
+    Route::middleware('role:restaurant')->get('/dashboard/restaurant', [DashboardController::class, 'restaurant'])->name('dashboard.restaurant');
+    Route::middleware('role:client')->get('/dashboard/client', [DashboardController::class, 'client'])->name('dashboard.client');
 
     Route::get('/restaurants', [RestaurantController::class, 'index'])->name('restaurants.index');
     Route::get('/restaurants/create', [RestaurantController::class, 'create'])->name('restaurants.create');
@@ -40,7 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
+
 });
 
 // Route::get('/dashboard', function () {
