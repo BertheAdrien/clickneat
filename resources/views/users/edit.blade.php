@@ -20,6 +20,7 @@
             <label for="role">Rôle : </label>
             <input type="text" id="role" name="role" placeholder="Rôle" value="{{ $user->role }}">
         </div>
+        <button type="submit">Envoyer</button>
     </form>
 
 @endsection
