@@ -11,7 +11,7 @@ class UserController extends Controller
     {
 
         return view('users.index', [
-            'users' => User::with('categories')->get()
+            'users' => User::all()
         ]);
     }
 
