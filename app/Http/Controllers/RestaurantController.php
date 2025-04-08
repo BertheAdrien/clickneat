@@ -59,4 +59,5 @@ class RestaurantController extends Controller
         Restaurant::findOrFail($id)->delete();
         return redirect()->route('restaurants.index');
     }
+
 }

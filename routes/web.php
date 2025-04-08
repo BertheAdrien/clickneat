@@ -8,12 +8,14 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RedirectController;
+use App\Http\Controllers\ClientController;
 
 Route::middleware('auth')->group(function () {
     Route::middleware('auth')->get('/', [RedirectController::class, 'handle'])->name('home');
     Route::middleware('role:admin')->get('/dashboard/admin', [DashboardController::class, 'admin'])->name('dashboard.admin');
     Route::middleware('role:restaurant')->get('/dashboard/restaurant', [DashboardController::class, 'restaurant'])->name('dashboard.restaurant');
-    Route::middleware('role:client')->get('/client/dashboard', [DashboardController::class, 'client'])->name('client.dashboard');
+    
+    Route::middleware('role:client')->get('/client/dashboard', [ClientController::class, 'index'])->name('client.dashboard');
 
     Route::get('/users', [UserController::class, 'index'])->name('users.index');
     Route::get('/users/create', [UserController::class, 'create'])->name('users.create');

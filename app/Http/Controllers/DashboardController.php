@@ -27,9 +27,4 @@ class DashboardController extends Controller
     {
         return view('dashboard.restaurant');
     }
-
-    public function client()
-    {
-        return view('client.dashboard');
-    }
 }
