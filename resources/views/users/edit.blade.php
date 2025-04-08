@@ -20,11 +20,9 @@
             <label for="role">Rôle</label>
             <select name="role" id="role" class="form-select">
                 <option value="">Choisir un rôle</option>
-                @foreach($roles as $role)
-                    <option value="{{ $role->id }}" {{ $user->role == $role->id ? 'selected' : '' }}>
-                        {{ ucfirst($role->name) }}
-                    </option>
-                @endforeach
+                <option value="admin" {{ $user->role === 'admin' ? 'selected' : '' }}>Admin</option>
+                <option value="restaurant" {{ $user->role === 'restaurant' ? 'selected' : '' }}>Restaurant</option>
+                <option value="client" {{ $user->role === 'client' ? 'selected' : '' }}>Client</option>
             </select>
         </div>
         <button type="submit">Envoyer</button>
