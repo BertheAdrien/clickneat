@@ -14,7 +14,7 @@
                             <div class="section-header d-flex flex-wrap justify-content-between mb-5">
                                 <h2 class="section-title">Categories</h2>
                                 <div class="d-flex align-items-center">
-                                    <a href="#" class="btn btn-primary me-2 view-all-btn">View All</a>
+                                    <a href="#" class="btn btn-primary me-2 view-all-btn">Voir tout</a>
                                     <div class="swiper-buttons">
                                         <button class="swiper-prev category-carousel-prev btn btn-yellow">❮</button>
                                         <button class="swiper-next category-carousel-next btn btn-yellow">❯</button>
@@ -67,7 +67,6 @@
                                                     <h3 class="fs-6 fw-normal">{{ $item->name }}</h3>
                                                     <div class="d-flex justify-content-center align-items-center gap-2">
                                                         <span class="text-dark fw-semibold">{{ $item->price }} €</span>
-                                                        <span>{{ $category->name }}</span>
                                                     </div>
                                                     <div class="button-area p-3 pt-0">
                                                         <div class="row g-1 mt-2">
@@ -90,60 +89,3 @@
     </div>
 @endsection
 
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const categoryLinks = document.querySelectorAll('.category-link');
-        const productItems = document.querySelectorAll('.product-item');
-        const viewAllButton = document.querySelector('.view-all-btn');
-
-        categoryLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                const categoryId = this.getAttribute('data-category');
-                filterProductsByCategory(categoryId);
-                highlightSelectedCategory(this);
-            });
-        });
-
-        if (viewAllButton) {
-            viewAllButton.addEventListener('click', function(e) {
-                e.preventDefault();
-                showAllProducts();
-                categoryLinks.forEach(link => link.classList.remove('active-category'));
-            });
-        }
-
-        function filterProductsByCategory(categoryId) {
-            productItems.forEach(item => {
-                const itemContainer = item.closest('.col');
-                if (itemContainer.getAttribute('data-category') === categoryId) {
-                    itemContainer.style.display = 'block';
-                } else {
-                    itemContainer.style.display = 'none';
-                }
-            });
-        }
-
-        function showAllProducts() {
-            productItems.forEach(item => {
-                const itemContainer = item.closest('.col');
-                itemContainer.style.display = 'block';
-            });
-        }
-
-        function highlightSelectedCategory(selectedLink) {
-            categoryLinks.forEach(link => link.classList.remove('active-category'));
-            selectedLink.classList.add('active-category');
-        }
-
-        const style = document.createElement('style');
-        style.textContent = `
-            .active-category {
-                background-color: #f8f9fa;
-                border-radius: 10px;
-                box-shadow: 0 0 5px rgba(0,0,0,0.1);
-            }
-        `;
-        document.head.appendChild(style);
-    });
-</script>

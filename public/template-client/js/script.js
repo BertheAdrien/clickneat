@@ -30,6 +30,62 @@
     });
 });
 
+document.addEventListener('DOMContentLoaded', function() {
+  const categoryLinks = document.querySelectorAll('.category-link');
+  const productItems = document.querySelectorAll('.product-item');
+  const viewAllButton = document.querySelector('.view-all-btn');
+
+  categoryLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const categoryId = this.getAttribute('data-category');
+          filterProductsByCategory(categoryId);
+          highlightSelectedCategory(this);
+      });
+  });
+
+  if (viewAllButton) {
+      viewAllButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          showAllProducts();
+          categoryLinks.forEach(link => link.classList.remove('active-category'));
+      });
+  }
+
+  function filterProductsByCategory(categoryId) {
+      productItems.forEach(item => {
+          const itemContainer = item.closest('.col');
+          if (itemContainer.getAttribute('data-category') === categoryId) {
+              itemContainer.style.display = 'block';
+          } else {
+              itemContainer.style.display = 'none';
+          }
+      });
+  }
+
+  function showAllProducts() {
+      productItems.forEach(item => {
+          const itemContainer = item.closest('.col');
+          itemContainer.style.display = 'block';
+      });
+  }
+
+  function highlightSelectedCategory(selectedLink) {
+      categoryLinks.forEach(link => link.classList.remove('active-category'));
+      selectedLink.classList.add('active-category');
+  }
+
+  const style = document.createElement('style');
+  style.textContent = `
+      .active-category {
+          background-color: #f8f9fa;
+          border-radius: 10px;
+          box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      }
+  `;
+  document.head.appendChild(style);
+});
+
   // init Chocolat light box
 	var initChocolat = function() {
 		Chocolat(document.querySelectorAll('.image-link'), {
