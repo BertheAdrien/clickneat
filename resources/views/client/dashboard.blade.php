@@ -11,7 +11,6 @@
             <div class="row">
                 <div class="section-header d-flex align-items-center justify-content-between my-4">
                     <h2 class="section-title">Restaurants disponibles</h2>
-                    <a href="#" class="btn btn-primary">View All</a>
                 </div>
                 <div class="mb-3">
                     <input type="text" id="searchInput" class="form-control" placeholder="Rechercher un restaurant...">
@@ -33,7 +32,7 @@
                                 </div>
                                 <div class="post-header">
                                     <h3 class="post-title">
-                                        <a href="#" class="text-decoration-none">{{ $restaurant->name }}</a>
+                                        <a href="{{ route('client.restaurantShow', $restaurant->id) }}" class="text-decoration-none">{{ $restaurant->name }}</a>
                                     </h3>
                                     <p>DESCRIPTION</p>
                                 </div>
@@ -44,23 +43,4 @@
             </div>
         </div>
     </section>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchInput = document.getElementById('searchInput');
-            const restaurantItems = document.querySelectorAll('.restaurant-item');
-
-            searchInput.addEventListener('input', function() {
-                const filter = searchInput.value.toLowerCase();
-                restaurantItems.forEach(item => {
-                    const restaurantName = item.querySelector('.post-title a').textContent.toLowerCase();
-                    if (restaurantName.includes(filter)) {
-                        item.style.display = '';
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            });
-        });
-    </script>
 @endsection

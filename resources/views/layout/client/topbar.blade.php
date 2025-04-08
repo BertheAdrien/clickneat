@@ -1,4 +1,4 @@
-<header>
+<header class="sticky-top bg-white shadow-sm">
   <div class="container-fluid">
     <div class="row py-3 border-bottom">
       

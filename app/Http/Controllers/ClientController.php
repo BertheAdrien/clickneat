@@ -15,4 +15,12 @@ class ClientController extends Controller
             'restaurants' => Restaurant::all()
         ]);
     }
+
+    public function show($id)
+    {
+        $restaurant = Restaurant::with('categories.items')->findOrFail($id);
+        return view('client.restaurantShow', [
+            'restaurant' => $restaurant
+        ]);
+    }
 }
