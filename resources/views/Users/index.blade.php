@@ -39,6 +39,7 @@
                                     <tr>
                                         <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
+                                        <td>{{ $user->role }}</td>
                                         <td>
                                             <div style="display: flex;">
                                                 <a class="btn btn-outline-success" style="margin-right: 8px;" href="{{ route('users.show', $user->id) }}">Voir</a>
