@@ -8,8 +8,18 @@
     <form action="{{ route('users.update', $user->id) }}" method="POST">
         @csrf
         @method('put')
-        <label for="name">Nom : </label>
-        <input type="text" id="name" name="name" placeholder="Nom" value="{{ $user->name }}">
-        <button type="submit">Envoyer</button>
+        <div>
+            <label for="name">Nom : </label>
+            <input type="text" id="name" name="name" placeholder="Nom" value="{{ $user->name }}">
+        </div>
+        <div>
+            <label for="email">Email : </label>
+            <input type="email" id="email" name="email" placeholder="Email" value="{{ $user->email }}">
+        </div>
+        <div>
+            <label for="role">Rôle : </label>
+            <input type="text" id="role" name="role" placeholder="Rôle" value="{{ $user->role }}">
+        </div>
     </form>
+
 @endsection
