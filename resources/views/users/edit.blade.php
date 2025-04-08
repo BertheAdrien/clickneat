@@ -18,14 +18,12 @@
         </div>
         <div>
             <label for="role">Rôle</label>
-            <select name="role" id="role">
+            <select name="role" id="role" class="form-select">
                 <option value="">Choisir un rôle</option>
-                @foreach($user->roles as $role)
-                    @if($role->id == $user->role)
-                        <option value="{{ $role->id }}" selected="selected">{{ $role->name }}</option>
-                    @else
-                        <option value="{{ $role->id }}">{{ $role->name }}</option>
-                    @endif
+                @foreach($roles as $role)
+                    <option value="{{ $role->id }}" {{ $user->role == $role->id ? 'selected' : '' }}>
+                        {{ ucfirst($role->name) }}
+                    </option>
                 @endforeach
             </select>
         </div>
