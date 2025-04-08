@@ -1,14 +1,27 @@
 @extends('layout.admin.main')
 
 @section('main')
-    <h1>Creation restaurant</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Création d'un Restaurant</h4>
 
-    <a href="{{ route('restaurants.index') }}">Retour à la liste</a>
+                        <a href="{{ route('restaurants.index') }}" class="btn btn-secondary mb-3">Retour à la liste</a>
 
-    <form action="{{ route('restaurants.store') }}" method="POST">
-        @csrf
-        <label for="name">Nom : </label>
-        <input type="text" id="name" name="name" placeholder="Nom">
-        <button type="submit">Envoyer</button>
-    </form>
+                        <form action="{{ route('restaurants.store') }}" method="POST">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nom du Restaurant :</label>
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Nom du restaurant" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Envoyer</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
