@@ -13,6 +13,15 @@
               ><span class="hide-menu">Dashboard</span></a
             >
           </li>
+          <li class="sidebar-item {{ request()->routeIs('users.*') ? 'selected' : '' }}">
+            <a
+              class="sidebar-link waves-effect waves-dark sidebar-link"
+              href={{ route('users.index') }}
+              aria-expanded="false"
+              ><i class="mdi mdi-account"></i
+              ><span class="hide-menu">Utilisateurs</span></a
+            >
+          </li>
           <li class="sidebar-item {{ request()->routeIs('restaurants.*') ? 'selected' : '' }}">
             <a
               class="sidebar-link waves-effect waves-dark sidebar-link"
@@ -40,6 +49,7 @@
               ><span class="hide-menu">Items</span></a
             >
           </li>
+
         </ul>
       </nav>
       <!-- End Sidebar navigation -->
