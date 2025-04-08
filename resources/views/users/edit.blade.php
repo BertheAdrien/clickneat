@@ -20,7 +20,7 @@
             <label for="role">Rôle</label>
             <select name="role" id="role">
                 <option value="">Choisir un rôle</option>
-                @foreach($roles as $role)
+                @foreach($user->roles as $role)
                     @if($role->id == $user->role)
                         <option value="{{ $role->id }}" selected="selected">{{ $role->name }}</option>
                     @else
