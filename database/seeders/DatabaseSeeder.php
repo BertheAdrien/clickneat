@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
 
         Category::factory(80)->create();
 
-        Item::factory(200)->create();
+        Item::factory(400)->create();
     }
 
 
