@@ -1,40 +1,65 @@
 @extends('layout.admin.main')
 
 @section('main')
-    <h1>Modification item</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <form class="form-horizontal" action="{{ route('items.update', $item->id) }}" method="POST">
+                        @csrf
+                        @method('put')
+                        <div class="card-body">
+                            <h4 class="card-title">Modification item</h4>
 
-    <a href="{{ route('items.index') }}">Retour à la liste</a>
+                            <!-- Nom de l'item -->
+                            <div class="form-group row">
+                                <label for="name" class="col-sm-3 text-end control-label col-form-label">Nom</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Nom" value="{{ $item->name }}">
+                                </div>
+                            </div>
 
-    <form action="{{ route('items.update', $item->id ) }}" method="POST">
-        @csrf 
-        @method('put')
-        <div>
-            <label for="name">Nom : </label>
-            <input type="text" id="name" name="name" placeholder="Nom" value="{{ $item->name }}">
-        </div>
-        <div>
-            <label for="cost">Coût : </label>
-            <input type="text" id="cost" name="cost" placeholder="Coût" value="{{ $item->cost }}">
-        </div>
-        <div>
-            <label for="price">Prix : </label>
-            <input type="text" id="price" name="price" placeholder="Prix" value="{{ $item->price }}">
-        </div>
+                            <!-- Coût de l'item -->
+                            <div class="form-group row">
+                                <label for="cost" class="col-sm-3 text-end control-label col-form-label">Coût</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="cost" name="cost" placeholder="Coût" value="{{ $item->cost }}">
+                                </div>
+                            </div>
 
-        <div>
-            <label for="category_id">Categorie</label>
-            <select name="category_id" id="category_id">
-                <option value="">Choisir une categorie</option>
-                @foreach($categories as $category)
-                    @if($category->id == $item->category_id)
-                        <option value="{{ $category->id }}" selected="selected">{{ $category->name }}</option>
-                    @else
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                    @endif
-                @endforeach
-            </select>
+                            <!-- Prix de l'item -->
+                            <div class="form-group row">
+                                <label for="price" class="col-sm-3 text-end control-label col-form-label">Prix</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="price" name="price" placeholder="Prix" value="{{ $item->price }}">
+                                </div>
+                            </div>
+
+                            <!-- Catégorie de l'item -->
+                            <div class="form-group row">
+                                <label for="category_id" class="col-sm-3 text-end control-label col-form-label">Catégorie</label>
+                                <div class="col-sm-9">
+                                    <select class="form-control" name="category_id" id="category_id">
+                                        <option value="">Choisir une catégorie</option>
+                                        @foreach($categories as $category)
+                                            <option value="{{ $category->id }}" {{ $category->id == $item->category_id ? 'selected' : '' }}>
+                                                {{ $category->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="border-top">
+                            <div class="card-body text-end">
+                                <a href="{{ route('items.index') }}" class="btn btn-secondary">Retour</a>
+                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-        <button type="submit">Envoyer</button>
-    </form>
-    
+    </div>
 @endsection

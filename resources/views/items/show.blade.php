@@ -1,21 +1,50 @@
 @extends('layout.admin.main')
 
 @section('main')
-    <h1>Items</h1>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Détails de l'Item</h4>
 
-    <a href="{{ route('items.index') }}">Retour à la liste</a>
-    <a href="{{ route('items.create') }}">Créer un item</a>
+                        <ul class="list-unstyled">
+                            <li><strong>id : </strong>{{ $item->id }}</li>
+                            <li><strong>Nom : </strong>{{ $item->name }}</li>
+                            <li><strong>Coût : </strong>{{ $item->cost }}</li>
+                            <li><strong>Prix : </strong>{{ $item->price }}</li>
+                            <li><strong>Créé le : </strong>{{ $item->created_at }}</li>
+                            <li><strong>Mis à jour le : </strong>{{ $item->updated_at }}</li>
+                        </ul>
 
-    <ul>
-        <li>id : {{ $item->id }}</li>
-        <li>nom : {{ $item->name }}</li>
-        <li>cost : {{ $item->cost }}</li>
-        <li>price : {{ $item->price }}</li>
-        <li>created_at : {{ $item->created_at }}</li>
-        <li>updated_at : {{ $item->updated_at }}</li>
-    </ul>
+                        <hr>
 
-    <a href="{{ route('categories.show', $item->category->id) }}"><h2>Categorie associée {{ $item->category->name }} </h2></a>
-    
-    <a href="{{ route('restaurants.show', $item->category->restaurant->id) }}"><h2>Restaurant associé {{ $item->category->restaurant->name }} </h2></a>
+                        <!-- Lien vers la catégorie associée -->
+                        <div>
+                            <h5><strong>Catégorie associée</strong></h5>
+                            <a class="btn btn-outline-secondary" href="{{ route('categories.show', $item->category->id) }}">
+                                {{ $item->category->name }}
+                            </a>
+                        </div>
+
+                        <!-- Lien vers le restaurant associé -->
+                        <div>
+                            <h5><strong>Restaurant associé</strong></h5>
+                            <a class="btn btn-outline-secondary" href="{{ route('restaurants.show', $item->category->restaurant->id) }}">
+                                {{ $item->category->restaurant->name }}
+                            </a>
+                        </div>
+
+                        <hr>
+
+                        <!-- Boutons d'action -->
+                        <div class="text-end">
+                            <a href="{{ route('items.edit', $item->id) }}" class="btn btn-warning">Modifier</a>
+                            <a href="{{ route('items.index') }}" class="btn btn-secondary">Retour à la liste</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

@@ -34,7 +34,7 @@ class UserController extends Controller
     public function show($id)
     {
         return view('users.show', [
-            'user' => User::with('categories.items')->findOrFail($id),
+            'user' => User::findOrFail($id)
         ]);
     }
 
