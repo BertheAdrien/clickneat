@@ -17,8 +17,17 @@
             <input type="email" id="email" name="email" placeholder="Email" value="{{ $user->email }}">
         </div>
         <div>
-            <label for="role">Rôle : </label>
-            <input type="text" id="role" name="role" placeholder="Rôle" value="{{ $user->role }}">
+            <label for="role">Rôle</label>
+            <select name="role" id="role">
+                <option value="">Choisir un rôle</option>
+                @foreach($roles as $role)
+                    @if($role->id == $user->role)
+                        <option value="{{ $role->id }}" selected="selected">{{ $role->name }}</option>
+                    @else
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endif
+                @endforeach
+            </select>
         </div>
         <button type="submit">Envoyer</button>
     </form>

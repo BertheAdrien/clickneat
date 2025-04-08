@@ -31,6 +31,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nom</th>
+                                    <th>Email</th>
                                     <th>Rôle</th>
                                     <th>Actions</th>
                                 </tr>
