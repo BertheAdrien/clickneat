@@ -9,6 +9,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\OrderController;
+use App\Models\Order;
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [RedirectController::class, 'handle'])->name('home');
@@ -58,15 +60,19 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:client')->group(function () {
         Route::get('/client/dashboard', [ClientController::class, 'index'])->name('client.dashboard');
         Route::get('/client/restaurantShow/{id}', [ClientController::class, 'show'])->name('client.restaurantShow');
+        
+        
+        Route::get('/client/confirmation/{id}', [OrderController::class, 'confirmation'])->name('client.confirmation');
+        Route::post('/client/restaurantShow', [OrderController::class, 'addItem'])->name('order.addItem');
+        Route::get('/client/restaurantShow', [OrderController::class, 'cart'])->name('client.cart');
+        Route::get('/client/cart', [OrderController::class, 'cart'])->name('client.cart');
+        Route::post('/client/cart', [OrderController::class, 'validateOrder'])->name('order.validateOrder');
+        Route::delete('/order/removeItem/{id}', [OrderController::class, 'removeItem'])->name('order.removeItem');
+
+        Route::get('/client/restaurantShow/{id}', [ClientController::class, 'show'])->name('client.restaurantShow');
+        // Route::get('/client/dashboard', [OrderController::class, 'index'])->name('client.dashboard');
+
     });
-
-    
-
 });
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
 
 require __DIR__.'/auth.php';

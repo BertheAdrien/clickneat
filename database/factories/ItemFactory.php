@@ -41,8 +41,8 @@ class ItemFactory extends Factory
         return [
             'name' => fake()->randomElement($itemNames),
             'category_id' => random_int(1, 80),
-            'cost' => random_int(1, 50000), 
-            'price' => random_int(50001, 100000), 
+            'cost' => random_int(1, 50), 
+            'price' => random_int(1, 25), 
         ];
     }
 }

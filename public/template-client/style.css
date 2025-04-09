@@ -13,6 +13,12 @@ This is main CSS file that contains custom style rules used in this template
 /*--------------------------------------------------------------
 /** VARIABLES
 --------------------------------------------------------------*/
+
+.active-category {
+  font-weight: bold;
+  color: #6BB252;
+  border-bottom: 4px solid #6BB252;
+}
 body {
   --heading-font        : "Inter", sans-serif;
   --bs-link-color: #333;

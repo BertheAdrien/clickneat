@@ -94,6 +94,105 @@ document.addEventListener('DOMContentLoaded', function() {
 		})
 	}
 
+  document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const savedCategory = urlParams.get('active_category') || localStorage.getItem('activeCategory');
+    const savedScrollPosition = urlParams.get('scroll_position') || localStorage.getItem('scrollPosition');
+
+    const categoryLinks = document.querySelectorAll('.category-link');
+    const viewAllBtn = document.querySelector('.view-all-btn');
+    const productItems = document.querySelectorAll('.product-item');
+    const activeCategoryInputs = document.querySelectorAll('.active-category-input');
+    const scrollPositionInputs = document.querySelectorAll('.scroll-position-input');
+    const addToCartForms = document.querySelectorAll('.add-to-cart-form');
+
+    function applyFilter(categoryId) {
+        // Mettre à jour les classes des catégories
+        categoryLinks.forEach(link => {
+            if (link.dataset.category === categoryId) {
+                link.classList.add('active-category');
+            } else {
+                link.classList.remove('active-category');
+            }
+        });
+
+        // Filtrer les produits
+        const productCols = document.querySelectorAll('.product-grid .col');
+        productCols.forEach(col => {
+            if (categoryId && col.dataset.category !== categoryId) {
+                col.style.display = 'none';
+            } else {
+                col.style.display = '';
+            }
+        });
+
+        // Sauvegarder
+        localStorage.setItem('activeCategory', categoryId);
+        activeCategoryInputs.forEach(input => input.value = categoryId);
+    }
+
+    function resetFilter() {
+        categoryLinks.forEach(link => link.classList.remove('active-category'));
+        document.querySelectorAll('.product-grid .col').forEach(col => col.style.display = '');
+        localStorage.removeItem('activeCategory');
+        activeCategoryInputs.forEach(input => input.value = '');
+    }
+
+    categoryLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const categoryId = this.dataset.category;
+            applyFilter(categoryId);
+        });
+    });
+
+    if (viewAllBtn) {
+        viewAllBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            resetFilter();
+        });
+    }
+
+    addToCartForms.forEach(form => {
+        form.addEventListener('submit', function() {
+            const currentScrollPosition = window.scrollY;
+            localStorage.setItem('scrollPosition', currentScrollPosition);
+
+            const scrollInput = this.querySelector('.scroll-position-input');
+            if (scrollInput) scrollInput.value = currentScrollPosition;
+
+            // Marquer comme refresh
+            localStorage.setItem('isRefreshing', 'true');
+            setTimeout(() => localStorage.removeItem('isRefreshing'), 1000);
+        });
+    });
+
+    if (savedCategory) applyFilter(savedCategory);
+    if (savedScrollPosition) {
+        setTimeout(() => {
+            window.scrollTo(0, parseInt(savedScrollPosition));
+        }, 100);
+    }
+
+    const currentPageUrl = window.location.pathname;
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('a');
+        if (link) {
+            const href = link.getAttribute('href');
+            if (href && href !== '#' && !href.startsWith('#') && href !== currentPageUrl) {
+                localStorage.removeItem('activeCategory');
+            }
+        }
+    });
+
+    window.addEventListener('beforeunload', function() {
+        if (!localStorage.getItem('isRefreshing')) {
+            localStorage.removeItem('activeCategory');
+        }
+    });
+});
+
+
   var initSwiper = function() {
 
     var swiper = new Swiper(".main-swiper", {
@@ -156,6 +255,9 @@ document.addEventListener('DOMContentLoaded', function() {
       });
 
     });
+
+    // filer
+    
 
 
     // product single page

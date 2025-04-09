@@ -21,7 +21,7 @@
                     <div class="col-md-4 restaurant-item">
                         <article class="post-item card border-0 shadow-sm p-3">
                             <div class="image-holder zoom-effect">
-                                <a href="#">
+                                <a href="{{ route('client.restaurantShow', $restaurant->id) }}">
                                     <img src="{{ asset('template-client/images/post-thumbnail-1.jpg') }}" alt="post" class="card-img-top">
                                 </a>
                             </div>

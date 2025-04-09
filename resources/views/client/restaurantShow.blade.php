@@ -6,7 +6,7 @@
             <div class="col-md-12 pt-3">
                 <h2 class="section-title"><strong>{{ $restaurant->name }}</strong></h2>
                 <hr>
-            </div>
+            </div>        
             <section class="py-5 overflow-hidden">
                 <div class="container-lg">
                     <div class="row">
@@ -56,28 +56,40 @@
                             <div class="product-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5">
                                 @foreach($restaurant->categories as $category)
                                     @foreach($category->items as $item)
-                                        <div class="col product-item" data-category="{{ $category->id }}">
+                                        <div class="col" data-category="{{ $category->id }}">
                                             <div class="product-item">
                                                 <figure>
-                                                    <a title="Product Title">
+                                                    <a title="{{ $item->name }}">
                                                         <img src="{{ asset('template-client/images/product-thumb-1.png') }}" alt="Product Thumbnail" class="tab-image">
-                                                    </a>
-                                                </figure>
-                                                <div class="d-flex flex-column text-center">
-                                                    <h3 class="fs-6 fw-normal">{{ $item->name }}</h3>
-                                                    <div class="d-flex justify-content-center align-items-center gap-2">
-                                                        <span class="text-dark fw-semibold">{{ $item->price }} €</span>
-                                                    </div>
-                                                    <div class="button-area p-3 pt-0">
+                                                </a>
+                                            </figure>
+                                            <div class="d-flex flex-column text-center">
+                                                <h3 class="fs-6 fw-normal">{{ $item->name }}</h3>
+                                                <div class="d-flex justify-content-center align-items-center gap-2">
+                                                    <span class="text-dark fw-semibold">{{ $item->price }} €</span>
+                                                </div>
+                                                <div class="button-area p-3 pt-0">
+                                                    <form action="{{ route('order.addItem') }}" method="POST" class="add-to-cart-form">
+                                                        @csrf
+                                                        <input type="hidden" name="item_id" value="{{ $item->id }}">
+                                                        <input type="hidden" name="restaurant_id" value="{{ $restaurant->id }}">
+                                                        <input type="hidden" name="active_category" class="active-category-input" value="">
+                                                        <input type="hidden" name="scroll_position" class="scroll-position-input" value="">
                                                         <div class="row g-1 mt-2">
-                                                            <div class="col-3"><input type="number" name="quantity" class="form-control border-dark-subtle input-number quantity" value="1"></div>
-                                                            <div class="col-7"><a href="#" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart"><svg width="18" height="18"><use xlink:href="#cart"></use></svg> Add to Cart</a></div>
-                                                            <div class="col-2"><a href="#" class="btn btn-outline-dark rounded-1 p-2 fs-6"><svg width="18" height="18"><use xlink:href="#heart"></use></svg></a></div>
+                                                            <div class="col-3">
+                                                                <input type="number" name="quantity" class="form-control border-dark-subtle input-number quantity" value="1" min="1">
+                                                            </div>
+                                                            <div class="col-9">
+                                                                <button type="submit" class="btn btn-primary rounded-1 p-2 fs-7 btn-cart">
+                                                                    <svg width="18" height="18"><use xlink:href="#cart"></use></svg> Ajouter
+                                                                </button>
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
                                     @endforeach
                                 @endforeach
                             </div>
@@ -86,6 +98,6 @@
                 </div>
             </section>
         </div>
-    </div>
+    </div>  
 @endsection
 

@@ -51,33 +51,44 @@
   </div>
 </header>
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart">
-  <div class="offcanvas-header justify-content-center">
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  <div class="offcanvas-header justify-content-between">
+    <h5 class="offcanvas-title">Votre panier</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Fermer"></button>
   </div>
-  <div class="offcanvas-body">
-    <div class="order-md-last">
-      <h4 class="d-flex justify-content-between align-items-center mb-3">
-        <span class="text-primary">Your cart</span>
-        <span class="badge bg-primary rounded-pill">3</span>
-      </h4>
-      <ul class="list-group mb-3">
-        <li class="list-group-item d-flex justify-content-between lh-sm">
-          <div>
-            <h6 class="my-0">Growers cider</h6>
-            <small class="text-body-secondary">Brief description</small>
-          </div>
-          <span class="text-body-secondary">$12</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between">
-          <span>Total (USD)</span>
-          <strong>$20</strong>
-        </li>
-      </ul>
 
-      <button class="w-100 btn btn-primary btn-lg" type="submit">Continue to checkout</button>
+  <div class="offcanvas-body d-flex flex-column">
+    <div class="order-md-last flex-grow-1">
+      <h6 class="text-muted mb-3">
+        Restaurant : <strong>{{ $order->restaurant->name }}</strong>
+      </h6>
+
+      {{-- Liste des items --}}
+      <div class="mb-4">
+        @foreach($order->items as $item)
+          <div class="d-flex justify-content-between align-items-start border-bottom py-2">
+            <div class="me-2">
+              <div class="fw-semibold">{{ $item->name }}</div>
+              {{-- Optionnel : quantité, description, etc. --}}
+            </div>
+            <div class="text-end">
+              <span class="text-body-secondary">{{ $item->price }} €</span>
+            </div>
+          </div>
+        @endforeach
+      </div>
+
+      <div class="d-flex justify-content-between border-top pt-3 mb-4 fw-semibold">
+        <span>Total</span>
+        <span>{{ $order->total_price }} €</span>
+      </div>
     </div>
+
+    <a href="{{ route('client.cart') }}" class="btn btn-primary btn-lg w-100">
+      Continuer vers la commande
+    </a>
   </div>
 </div>
+
 
 <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar">
 
