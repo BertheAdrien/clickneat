@@ -65,13 +65,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/client/confirmation/{id}', [OrderController::class, 'confirmation'])->name('client.confirmation');
         Route::post('/client/restaurantShow', [OrderController::class, 'addItem'])->name('order.addItem');
         Route::get('/client/restaurantShow', [OrderController::class, 'cart'])->name('client.cart');
-        Route::get('/client/cart', [OrderController::class, 'cart'])->name('client.cart');
         Route::post('/client/cart', [OrderController::class, 'validateOrder'])->name('order.validateOrder');
         Route::delete('/order/removeItem/{id}', [OrderController::class, 'removeItem'])->name('order.removeItem');
-
-        Route::get('/client/restaurantShow/{id}', [ClientController::class, 'show'])->name('client.restaurantShow');
-        // Route::get('/client/dashboard', [OrderController::class, 'index'])->name('client.dashboard');
-
     });
 });
 
