@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card">
+                <div class="card sticky-below-nav">
                     <div class="card-header bg-primary text-white">
                         <h5 class="mb-0">Récapitulatif</h5>
                     </div>

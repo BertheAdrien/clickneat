@@ -50,6 +50,7 @@
     </div>
   </div>
 </header>
+
 <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart">
   <div class="offcanvas-header justify-content-between">
     <h5 class="offcanvas-title">Votre panier</h5>
@@ -59,44 +60,48 @@
   <div class="offcanvas-body d-flex flex-column">
     <div class="order-md-last flex-grow-1">
       <h6 class="text-muted mb-3">
-        Restaurant : <strong>{{ $order->restaurant->name }}</strong>
+        {{-- Afficher le restaurant uniquement si $order existe --}}
+        @if($order)
+          Restaurant : <strong>{{ $order->restaurant->name }}</strong>
+        @else
+          Aucun restaurant sélectionné.
+        @endif
       </h6>
 
       {{-- Liste des items --}}
       <div class="mb-4">
-        @foreach($order->items as $item)
-          <div class="d-flex justify-content-between align-items-start border-bottom py-2">
-            <div class="me-2">
-              <div class="fw-semibold">{{ $item->name }}</div>
-              {{-- Optionnel : quantité, description, etc. --}}
+        @if($order && $order->items->count() > 0)
+          @foreach($order->items as $item)
+            <div class="d-flex justify-content-between align-items-start border-bottom py-2">
+              <div class="me-2">
+                <div class="fw-semibold">{{ $item->name }}</div>
+                {{-- Optionnel : quantité, description, etc. --}}
+              </div>
+              <div class="text-end">
+                <span class="text-body-secondary">{{ $item->price }} €</span>
+              </div>
             </div>
-            <div class="text-end">
-              <span class="text-body-secondary">{{ $item->price }} €</span>
-            </div>
-          </div>
-        @endforeach
+          @endforeach
+        @else
+          <div>Aucun article dans le panier.</div>
+        @endif
       </div>
 
       <div class="d-flex justify-content-between border-top pt-3 mb-4 fw-semibold">
         <span>Total</span>
-        <span>{{ $order->total_price }} €</span>
+        <span>{{ $order ? $order->total_price : '0.00' }} €</span>
       </div>
     </div>
 
-    <a href="{{ route('client.cart') }}" class="btn btn-primary btn-lg w-100">
-      Continuer vers la commande
-    </a>
+    @if($order && $order->items->count() > 0)
+      <a href="{{ route('client.cart') }}" class="btn btn-primary btn-lg w-100">
+        Continuer vers la commande
+      </a>
+    @else
+      <a href="{{ route('client.dashboard') }}" class="btn btn-secondary btn-lg w-100">
+        Retour à l'accueil
+      </a>
+    @endif
   </div>
 </div>
 
-
-<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar">
-
-  <div class="offcanvas-header justify-content-between">
-    <h4 class="fw-normal text-uppercase fs-6">Menu</h4>
-    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-  </div>
-  <div class="offcanvas-body">
-    
-  </div>
-</div>

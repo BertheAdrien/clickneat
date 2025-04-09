@@ -10,7 +10,8 @@
     <div class="page-wrapper">
         @yield('main')
     </div>
-    
+
+    @include('layout.client.cssFix')
     @include('layout.client.scripts')
 </body>
 </html>

@@ -98,6 +98,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
     const savedCategory = urlParams.get('active_category') || localStorage.getItem('activeCategory');
     const savedScrollPosition = urlParams.get('scroll_position') || localStorage.getItem('scrollPosition');
+    
+    // Vérifier si nous sommes sur la même page que celle où le scroll a été sauvegardé
+    const currentPageUrl = window.location.pathname;
+    const savedPageUrl = localStorage.getItem('lastPageUrl');
 
     const categoryLinks = document.querySelectorAll('.category-link');
     const viewAllBtn = document.querySelector('.view-all-btn');
@@ -157,6 +161,7 @@ document.addEventListener('DOMContentLoaded', function() {
         form.addEventListener('submit', function() {
             const currentScrollPosition = window.scrollY;
             localStorage.setItem('scrollPosition', currentScrollPosition);
+            localStorage.setItem('lastPageUrl', window.location.pathname);
 
             const scrollInput = this.querySelector('.scroll-position-input');
             if (scrollInput) scrollInput.value = currentScrollPosition;
@@ -168,19 +173,31 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     if (savedCategory) applyFilter(savedCategory);
-    if (savedScrollPosition) {
+    
+    // Seulement restaurer le scroll si nous sommes sur la même page
+    if (savedScrollPosition && (currentPageUrl === savedPageUrl || !savedPageUrl)) {
         setTimeout(() => {
             window.scrollTo(0, parseInt(savedScrollPosition));
         }, 100);
+    } else {
+        // Si nous sommes sur une nouvelle page, effacer la position de défilement
+        localStorage.removeItem('scrollPosition');
     }
 
-    const currentPageUrl = window.location.pathname;
+    // Sauvegarder l'URL de la page actuelle
+    localStorage.setItem('lastPageUrl', currentPageUrl);
+
     document.addEventListener('click', function(e) {
         const link = e.target.closest('a');
         if (link) {
             const href = link.getAttribute('href');
+            // Si on clique sur un lien qui va vers une autre page
             if (href && href !== '#' && !href.startsWith('#') && href !== currentPageUrl) {
-                localStorage.removeItem('activeCategory');
+                // Nettoyer le localStorage sauf si on ajoute au panier
+                if (!localStorage.getItem('isRefreshing')) {
+                    localStorage.removeItem('activeCategory');
+                    localStorage.removeItem('scrollPosition');
+                }
             }
         }
     });
@@ -188,6 +205,7 @@ document.addEventListener('DOMContentLoaded', function() {
     window.addEventListener('beforeunload', function() {
         if (!localStorage.getItem('isRefreshing')) {
             localStorage.removeItem('activeCategory');
+            localStorage.removeItem('scrollPosition');
         }
     });
 });
