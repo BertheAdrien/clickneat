@@ -1,6 +1,6 @@
-<header class="sticky-top bg-white shadow-sm">
-  <div class="container-fluid">
-    <div class="row py-3 border-bottom">
+<header class="sticky-top bg-white shadow-sm ">
+  <div class="container-fluid border-bottom">
+    <div class="row py-3 ">
       
       <div class="col-sm-4 col-lg-2 text-center text-sm-start d-flex gap-3 justify-content-center justify-content-md-start">
         <div class="d-flex align-items-center my-3 my-sm-0">
@@ -104,4 +104,11 @@
     @endif
   </div>
 </div>
+
+<style>
+
+header .border-bottom {
+  border-bottom: 3px solid #6BB252 !important;
+}
+</style>
 

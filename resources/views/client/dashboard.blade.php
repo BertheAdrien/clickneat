@@ -12,14 +12,14 @@
                 <div class="section-header d-flex align-items-center justify-content-between my-4">
                     <h2 class="section-title">Restaurants disponibles</h2>
                 </div>
-                <div class="mb-3">
+                <div class="mb-3 search-border">
                     <input type="text" id="searchInput" class="form-control" placeholder="Rechercher un restaurant...">
                 </div>
             </div>
             <div class="row" id="restaurantList">
                 @foreach ($restaurants as $restaurant)
                     <div class="col-md-4 restaurant-item">
-                        <article class="post-item card border-0 shadow-sm p-3">
+                        <article class="post-item card shadow-sm p-3 mt-3 ">
                             <div class="image-holder zoom-effect">
                                 <a href="{{ route('client.restaurantShow', $restaurant->id) }}">
                                     <img src="{{ asset('template-client/images/post-thumbnail-1.jpg') }}" alt="post" class="card-img-top">
@@ -43,4 +43,15 @@
             </div>
         </div>
     </section>
+
+    <style>
+        .post-item{
+            border-color: #6BB252 !important;
+        }
+        .search-border{
+            border: 3px solid #6BB252;
+            border-radius: 10px;
+            
+        }
+    </style>
 @endsection
