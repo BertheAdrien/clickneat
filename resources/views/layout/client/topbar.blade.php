@@ -74,11 +74,11 @@
           @foreach($order->items as $item)
             <div class="d-flex justify-content-between align-items-start border-bottom py-2">
               <div class="me-2">
-                <div class="fw-semibold">{{ $item->name }}</div>
-                {{-- Optionnel : quantité, description, etc. --}}
+                <div class="fw-semibold">{{ $item->name }} x {{ $item->quantity }}</div>
+                
               </div>
               <div class="text-end">
-                <span class="text-body-secondary">{{ $item->price }} €</span>
+                <span class="text-body-secondary">{{ $item->price * $item->quantity }} €</span>
               </div>
             </div>
           @endforeach
