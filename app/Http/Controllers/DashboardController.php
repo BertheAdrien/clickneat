@@ -22,9 +22,4 @@ class DashboardController extends Controller
         // Passer les données à la vue
         return view('dashboard.admin', compact('restaurants', 'categories', 'items', 'users'));
     }
-
-    public function restaurant()
-    {
-        return view('dashboard.restaurant');
-    }
 }

@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
+        Restaurant::factory(25)->create();
+
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@yahoo.fr',
@@ -33,6 +35,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'restaurant',
             'email' => 'restaurant@yahoo.fr',
             'role' => 'restaurant',
+            'restaurant_id' => 1,
             'password' => Hash::make('Pokemon72380'),
         ]);
 
@@ -42,7 +45,6 @@ class DatabaseSeeder extends Seeder
         ]);
 
         //combien de lignes à créer
-        Restaurant::factory(25)->create();
 
         Category::factory(80)->create();
 

@@ -18,9 +18,10 @@ return new class extends Migration
             $table->enum('status', [
                 'in_progress',       // Panier en cours de remplissage
                 'validated',        // Commande confirmée par le client
-                'ready',         // Livrée au client
+                'ready',         // Prête au restaurant
                 'canceled'         // Annulée
             ])->default('in_progress');
+            $table->time('time_to_pickup')->nullable();
             $table->decimal('total_price', 10, 2);
             $table->text('notes')->nullable();
             $table->timestamps();

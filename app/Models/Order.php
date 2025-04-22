@@ -18,6 +18,7 @@ class Order extends Model
         'user_id',
         'restaurant_id',
         'status',
+        'time_to_pickup',
         'total_price',
         'notes'
     ];

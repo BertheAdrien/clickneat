@@ -10,11 +10,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ManagerRestaurantController;
 use App\Models\Order;
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [RedirectController::class, 'handle'])->name('home');
-    Route::middleware('role:restaurant')->get('/dashboard/restaurant', [DashboardController::class, 'restaurant'])->name('dashboard.restaurant');
 
     Route::middleware('role:admin')->group(function () {
 
@@ -67,6 +67,28 @@ Route::middleware('auth')->group(function () {
         Route::get('/client/restaurantShow', [OrderController::class, 'cart'])->name('client.cart');
         Route::post('/client/cart', [OrderController::class, 'validateOrder'])->name('order.validateOrder');
         Route::delete('/order/removeItem/{id}', [OrderController::class, 'removeItem'])->name('order.removeItem');
+    });
+
+    Route::middleware('role:restaurant')->group(function () {
+        Route::get('/managerRestaurant/dashboard', [ManagerRestaurantController::class, 'dashboard'])->name('managerRestaurant.dashboard');        
+        Route::get('/managerRestaurant/categories/index', [ManagerRestaurantController::class, 'categories'])->name('managerRestaurant.categories.index');
+        Route::get('/managerRestaurant/categories/show/{id}', [CategoryController::class, 'show'])->name('managerRestaurant.categories.show');
+        Route::get('/managerRestaurant/categories/edit/{id}', [CategoryController::class, 'edit'])->name('managerRestaurant.categories.edit');
+        Route::put('/managerRestaurant/categories/update/{id}', [CategoryController::class, 'update'])->name('managerRestaurant.categories.update');
+        Route::get('/managerRestaurant/categories/create', [CategoryController::class, 'createManagerRestaurant'])->name('managerRestaurant.categories.create');
+        Route::post('/managerRestaurant/categories/create', [CategoryController::class, 'storeManagerRestaurant'])->name('managerRestaurant.categories.store');
+        
+        Route::delete('/managerRestaurant/categories/destroy/{id}', [CategoryController::class, 'destroy'])->name('managerRestaurant.categories.destroy');
+        Route::get('/managerRestaurant/items/show/{id}', [ItemController::class, 'showManagerRestaurant'])->name('managerRestaurant.items.show');
+        Route::get('/managerRestaurant/items/edit/{id}', [ItemController::class, 'editManagerRestaurant'])->name('managerRestaurant.items.edit');
+        Route::put('/managerRestaurant/items/update/{id}', [ItemController::class, 'update'])->name('managerRestaurant.items.update');
+        Route::get('/managerRestaurant/items/create', [ItemController::class, 'createManagerRestaurant'])->name('managerRestaurant.items.create');
+        Route::delete('/managerRestaurant/items/destroy/{id}', [ItemController::class, 'destroy'])->name('managerRestaurant.items.destroy');
+        Route::get('/managerRestaurant/items/index', [ManagerRestaurantController::class, 'items'])->name('managerRestaurant.items.index');
+        Route::post('/managerRestaurant/items/create', [ItemController::class, 'storeManagerRestaurant'])->name('managerRestaurant.items.store');
+        Route::get('/managerRestaurant/orders/index', [ManagerRestaurantController::class, 'orders'])->name('managerRestaurant.orders.index');
+        Route::put('/managerRestaurant/orders/complete/{orderId}', [ManagerRestaurantController::class, 'completeOrder'])->name('managerRestaurant.orders.complete');
+
     });
 });
 
