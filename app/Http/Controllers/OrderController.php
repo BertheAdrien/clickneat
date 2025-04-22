@@ -21,6 +21,13 @@ class OrderController extends Controller
         return view('client.cart', compact('order'));
     }
 
+    public function index($id){
+        $order = Order::findOrFail($id);
+        dd($order);
+
+        return view('client.orders.index', compact('order'));
+    }
+    
     /**
      * Ajouter un item au panier (commande en cours)
      */
@@ -114,7 +121,8 @@ class OrderController extends Controller
         
         // Récupérer la commande en cours
         $order = $this->getCurrentOrder();
-        
+
+        $id_order = $order->id;
         // Vérifier que la commande contient des articles
         if ($order->items->count() === 0) {
             return redirect()->back()->with('error', 'Votre panier est vide.');
@@ -124,8 +132,8 @@ class OrderController extends Controller
         $order->notes = $validated['notes'];
         $order->status = 'validated';
         $order->save();
-        
-        return redirect()->route('client.confirmation', $order)->with('success', 'Votre commande a été validée.');
+
+        return redirect()->route('client.confirmation', ['order' => $id_order])->with('success', 'Votre commande a été validée.');
     }
     
     /**
@@ -134,11 +142,10 @@ class OrderController extends Controller
     public function confirmation(Order $order)
     {
         // Vérifier que la commande appartient à l'utilisateur
-        if ($order->user_id !== Auth::id()) {
-            return redirect()->route('client.dashboard')->with('error', 'Vous n\'avez pas accès à cette commande.');
-        }
-        
-        return view('client.confirmation', compact('order'));
+        // if ($order->user_id !== Auth::id()) {
+        //     return redirect()->route('client.dashboard')->with('error', 'Vous n\'avez pas accès à cette commande.');
+        // }
+        return view('client.orders.index', compact('order'));
     }
     
     /**

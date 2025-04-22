@@ -62,11 +62,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/client/restaurantShow/{id}', [ClientController::class, 'show'])->name('client.restaurantShow');
         
         
-        Route::get('/client/confirmation/{id}', [OrderController::class, 'confirmation'])->name('client.confirmation');
+        Route::get('/client/confirmation/{order}', [OrderController::class, 'confirmation'])->name('client.confirmation');
         Route::post('/client/restaurantShow', [OrderController::class, 'addItem'])->name('order.addItem');
         Route::get('/client/restaurantShow', [OrderController::class, 'cart'])->name('client.cart');
         Route::post('/client/cart', [OrderController::class, 'validateOrder'])->name('order.validateOrder');
         Route::delete('/order/removeItem/{id}', [OrderController::class, 'removeItem'])->name('order.removeItem');
+        Route::get('/client/orders/show/{id}', [OrderController::class, 'show'])->name('client.orders.show');
     });
 
     Route::middleware('role:restaurant')->group(function () {
@@ -77,8 +78,8 @@ Route::middleware('auth')->group(function () {
         Route::put('/managerRestaurant/categories/update/{id}', [CategoryController::class, 'update'])->name('managerRestaurant.categories.update');
         Route::get('/managerRestaurant/categories/create', [CategoryController::class, 'createManagerRestaurant'])->name('managerRestaurant.categories.create');
         Route::post('/managerRestaurant/categories/create', [CategoryController::class, 'storeManagerRestaurant'])->name('managerRestaurant.categories.store');
-        
         Route::delete('/managerRestaurant/categories/destroy/{id}', [CategoryController::class, 'destroy'])->name('managerRestaurant.categories.destroy');
+        
         Route::get('/managerRestaurant/items/show/{id}', [ItemController::class, 'showManagerRestaurant'])->name('managerRestaurant.items.show');
         Route::get('/managerRestaurant/items/edit/{id}', [ItemController::class, 'editManagerRestaurant'])->name('managerRestaurant.items.edit');
         Route::put('/managerRestaurant/items/update/{id}', [ItemController::class, 'update'])->name('managerRestaurant.items.update');

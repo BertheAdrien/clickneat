@@ -13,8 +13,10 @@ class ItemController extends Controller
     public function index()
     {
         $restaurant_id = Auth::user()->restaurant_id;
-        if ($restaurant_id == null) {
-            return redirect()->route('items.index');
+        if (is_null($restaurant_id)) {
+            return view('items.index', [
+                'items' => Item::with('category')->get()
+            ]);
         }
         return view('managerRestaurant.items.index', [
             'items' => Item::where('restaurant_id', $restaurant_id)->with('category')->get()
