@@ -26,6 +26,11 @@ jobs:
           # Corriger les permissions du dossier .git et du projet entier
           sudo chown -R $(whoami):$(whoami) .
 
+                    
+          # Corriger les permissions pour le serveur web
+          sudo chown -R www-data:www-data .
+          sudo chmod -R 775 storage bootstrap/cache vendor
+          
           # Artisan commands
           sudo -u www-data php artisan config:clear
           sudo -u www-data php artisan route:clear
@@ -65,10 +70,6 @@ jobs:
           
           # Installer les dépendances
           composer install --no-dev --optimize-autoloader
-          
-          # Corriger les permissions pour le serveur web
-          sudo chown -R www-data:www-data .
-          sudo chmod -R 775 storage bootstrap/cache vendor
           
           # Assurer que les scripts artisan sont exécutables
           sudo chmod +x artisan
