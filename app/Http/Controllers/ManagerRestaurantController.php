@@ -27,9 +27,6 @@ class ManagerRestaurantController extends Controller
         $restaurantId = Auth::user()->restaurant_id;
         $restaurantName = Restaurant::find($restaurantId);
 
-    // Optionnel pour debug
-    // dd($restaurant);
-
     return view('managerRestaurant.dashboard', compact('restaurantName'));
     }
         
