@@ -27,8 +27,13 @@ class Restaurant extends Model
         return $this->hasMany(Item::class);
     }
 
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
     public function managerRestaurant()
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class);
     }
 }
