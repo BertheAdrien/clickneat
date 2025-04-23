@@ -36,14 +36,6 @@ jobs:
           sudo -u www-data php artisan view:clear
           sudo -u www-data php artisan cache:clear
 
-          # Vérifier que la table 'cache' existe sinon l'exécuter
-          if ! mysql -u root -e "USE clickneat; SHOW TABLES LIKE 'cache';" | grep -q 'cache'; then
-            echo "➡️ Migration de la table 'cache' nécessaire."
-            sudo -u www-data php artisan migrate --path=$(find database/migrations -name '*create_cache_table.php') --force
-          else
-            echo "✅ Table 'cache' déjà existante."
-          fi
-
           sudo -u www-data php artisan config:cache
           sudo -u www-data php artisan route:cache
           sudo -u www-data php artisan migrate --force
