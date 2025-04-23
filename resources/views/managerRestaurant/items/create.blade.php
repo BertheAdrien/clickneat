@@ -31,7 +31,7 @@
                                 <label for="category_id" class="form-label">Catégorie :</label>
                                 <select name="category_id" id="category_id" class="form-select" required>
                                     <option value="">Choisir une catégorie</option>
-                                    @foreach($restaurant->categories as $category)
+                                    @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
                                 </select>
