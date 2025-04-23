@@ -32,11 +32,11 @@ class ItemController extends Controller
 
     public function createManagerRestaurant()
     {
-        $restaurant = Auth::user()->restaurant;
+        $restaurant_id = Auth::user()->restaurant_id;
     
         return view('managerRestaurant.items.create', [
-            'categories' => Category::where('restaurant_id', $restaurant->id)->with('items')->get(),
-            'restaurant' => $restaurant
+            'categories' => Category::where('restaurant_id', $restaurant_id)->with('items')->get(),
+            'restaurant' => $restaurant_id
         ]);
     }
 
