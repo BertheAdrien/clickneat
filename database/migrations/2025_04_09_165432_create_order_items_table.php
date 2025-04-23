@@ -14,11 +14,16 @@ return new class extends Migration
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')->constrained()->onDelete('cascade');
-            $table->foreignId('item_id')->constrained()->nullOnDelete()->nullable();
+        
+            // ✅ ici on ajoute d'abord nullable, puis la contrainte
+            $table->foreignId('item_id')->nullable();
             $table->string('name');
             $table->integer('quantity');
             $table->decimal('price', 10, 2);
             $table->timestamps();
+        
+            // 💡 on applique la contrainte APRES avoir défini la colonne
+            $table->foreign('item_id')->references('id')->on('items')->nullOnDelete();
         });
     }
 
