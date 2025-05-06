@@ -30,8 +30,8 @@ class ManagerRestaurantController extends Controller
     return view('managerRestaurant.dashboard', compact('restaurantName'));
     }
         
-        /**
-         * Affiche la liste des catégories du restaurant
+    /**
+     * Affiche la liste des catégories du restaurant
      */
     public function categories()
     {
@@ -41,6 +41,9 @@ class ManagerRestaurantController extends Controller
     return view('managerRestaurant.categories.index', compact('categories'));
     }
 
+    /**
+     * Affiche la liste des produits du restaurant
+     */
     public function items()
     {
         $restaurant = Auth::user()->restaurant_id;
@@ -49,6 +52,9 @@ class ManagerRestaurantController extends Controller
         return view('managerRestaurant.items.index', compact('items'));
     }
     
+    /**
+     * Affiche la liste des commandes validées du restaurant
+     */
     public function orders()
     {
         $restaurant = Auth::user()->restaurant_id;
@@ -59,6 +65,9 @@ class ManagerRestaurantController extends Controller
         return view('managerRestaurant.orders.index', compact('orders'));
     }
     
+    /**
+     * Marque une commande comme prête
+     */
     public function completeOrder($orderId)
     {
         $order = Order::findOrFail($orderId);

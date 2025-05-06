@@ -20,7 +20,10 @@ class OrderController extends Controller
         
         return view('client.cart', compact('order'));
     }
-
+    
+    /**
+     * Afficher une commande
+     */
     public function index($id){
         $order = Order::findOrFail($id);
         dd($order);
@@ -170,7 +173,4 @@ class OrderController extends Controller
         
         return $order;
     }
-
-
-
 }

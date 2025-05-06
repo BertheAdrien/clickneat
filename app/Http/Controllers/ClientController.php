@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
+    // Affiche la page d'accueil du client
     public function index()
     {
         return view('client.dashboard', [
@@ -16,6 +17,7 @@ class ClientController extends Controller
         ]);
     }
 
+    // Affiche la page d'un restaurant
     public function show($id)
     {
         $restaurant = Restaurant::with('categories.items')->findOrFail($id);

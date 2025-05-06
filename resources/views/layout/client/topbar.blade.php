@@ -31,14 +31,10 @@
       <div class="col-sm-8 col-lg-2 d-flex gap-5 align-items-center justify-content-center justify-content-sm-end">
         <ul class="d-flex justify-content-end list-unstyled m-0">
           <li>
-            <a href="#" class="p-2 mx-1">
-              <svg width="24" height="24"><use xlink:href="#user"></use></svg>
-            </a>
-          </li>
-          <li>
-            <a href="#" class="p-2 mx-1">
-              <svg width="24" height="24"><use xlink:href="#wishlist"></use></svg>
-            </a>
+          <form action="{{ route('logout') }}" method="POST">
+            @csrf
+            <button type="submit" class="btn btn-danger">Logout</button>
+          </form>
           </li>
           <li>
             <a href="#" class="p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">

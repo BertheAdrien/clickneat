@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 class RedirectController extends Controller
 {
+    // Redirige l'utilisateur vers la page appropriée en fonction de son rôle
     public function handle()
     {
         $user = Auth::user();

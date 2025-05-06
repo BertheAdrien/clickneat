@@ -1,10 +1,6 @@
 @extends('layout.client.main')
 
 @section('main')
-    <form action="{{ route('logout') }}" method="POST">
-        @csrf
-        <button type="submit" class="btn btn-danger">Logout</button>
-    </form>
 
     <section id="latest-blog" class="pb-4">
         <div class="container-lg">

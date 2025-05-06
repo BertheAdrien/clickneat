@@ -7,6 +7,7 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    // Affiche la liste des utilisateurs
     public function index()
     {
 
@@ -15,11 +16,13 @@ class UserController extends Controller
         ]);
     }
 
+    // Affiche le formulaire de création d’un utilisateur
     public function create()
     {
         return view('users.create');
     }
 
+    // Enregistre un utilisateur
     public function store(Request $request)
     {
         $user = new User();
@@ -31,6 +34,7 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
 
+    // Affiche les détails d’un utilisateur
     public function show($id)
     {
         return view('users.show', [
@@ -38,6 +42,7 @@ class UserController extends Controller
         ]);
     }
 
+    // Affiche le formulaire de modification d’un utilisateur
     public function edit($id)
     {
         return view('users.edit', [
@@ -45,6 +50,7 @@ class UserController extends Controller
         ]);
     }
 
+    // Met à jour un utilisateur
     public function update(Request $request, $id)
     {
         $user = User::findOrFail($id);
@@ -52,6 +58,7 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
 
+    // Supprime un utilisateur
     public function destroy($id)
     {
         User::findOrFail($id)->delete();

@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
+    // Affiche la page d'accueil du dashboard
     public function admin()
     {
         // Récupérer les données nécessaires

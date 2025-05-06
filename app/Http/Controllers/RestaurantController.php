@@ -9,6 +9,7 @@ use App\Models\Item;
 
 class RestaurantController extends Controller
 {
+    // Affiche la liste des restaurants
     public function index()
     {
 
@@ -17,6 +18,7 @@ class RestaurantController extends Controller
         ]);
     }
 
+    // Affiche le formulaire de création de restaurant
     public function create()
     {
         return view('restaurants.create');
@@ -33,6 +35,7 @@ class RestaurantController extends Controller
         return redirect()->route('restaurants.index');
     }
 
+    // Affiche les détails d’un restaurant
     public function show($id)
     {
         return view('restaurants.show', [
@@ -40,6 +43,7 @@ class RestaurantController extends Controller
         ]);
     }
 
+    // Affiche le formulaire de modification d’un restaurant
     public function edit($id)
     {
         return view('restaurants.edit', [
@@ -47,6 +51,7 @@ class RestaurantController extends Controller
         ]);
     }
 
+    // Met à jour un restaurant
     public function update(Request $request, $id)
     {
         $restaurant = Restaurant::findOrFail($id);
@@ -54,6 +59,7 @@ class RestaurantController extends Controller
         return redirect()->route('restaurants.index');
     }
 
+    // Supprime un restaurant
     public function destroy($id)
     {
         Restaurant::findOrFail($id)->delete();
