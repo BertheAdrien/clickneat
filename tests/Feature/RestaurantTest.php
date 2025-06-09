@@ -4,8 +4,6 @@ use App\Models\Restaurant;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\Category;
-use App\Models\Item;
-use App\Models\Order;
 
 // TU001 - Création d’un restaurant
 it('crée un restaurant valide', function () {
