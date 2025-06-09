@@ -24,6 +24,14 @@
                                 <label for="password" class="form-label">Mot de passe :</label>
                                 <input type="password" id="password" name="password" class="form-control" placeholder="Mot de passe" required>
                             </div>
+                            <div class="mb-3">
+                                <label for="role" class="form-label">Role :</label>
+                                <select name="role" id="role" class="form-control">
+                                    <option value="admin">Admin</option>
+                                    <option value="user">User</option>
+                                    <option value="restaurant">Restaurant</option>
+                                </select>
+                            </div>
                             <button type="submit" class="btn btn-primary">Envoyer</button>
                         </form>
                     </div>
