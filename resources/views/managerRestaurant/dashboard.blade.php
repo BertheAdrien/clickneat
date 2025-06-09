@@ -19,7 +19,7 @@
                 <!-- Row to align cards on the same line, centered -->
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-3 col-lg-3 col-xlg-3 mb-4">
-                        <a href="{{ route('categories.index') }}" class="btn btn-link text-decoration-none w-100 h-100">
+                        <a href="{{ route('managerRestaurant.categories.index') }}" class="btn btn-link text-decoration-none w-100 h-100">
                             <div class="box bg-success text-center card card-hover" style="height: 150px; display: flex; flex-direction: column; justify-content: center;">
                                 <h1 class="font-light text-white">
                                     <i class="mdi mdi-chart-scatterplot-hexbin"></i>
@@ -29,7 +29,7 @@
                         </a>
                     </div>
                     <div class="col-md-3 col-lg-3 col-xlg-3 mb-4">
-                        <a href="{{ route('items.index') }}" class="btn btn-link text-decoration-none w-100 h-100">
+                        <a href="{{ route('managerRestaurant.items.index') }}" class="btn btn-link text-decoration-none w-100 h-100">
                             <div class="box bg-info text-center card card-hover" style="height: 150px; display: flex; flex-direction: column; justify-content: center;">
                                 <h1 class="font-light text-white">
                                     <i class="mdi mdi-border-inside"></i>
