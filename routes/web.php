@@ -11,6 +11,7 @@ use App\Http\Controllers\RedirectController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ManagerRestaurantController;
+use App\Http\Controllers\PromoCodeController;   
 use App\Models\Order;
 
 Route::middleware('auth')->group(function () {
@@ -90,9 +91,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/managerRestaurant/items/create', [ItemController::class, 'storeManagerRestaurant'])->name('managerRestaurant.items.store');
         Route::get('/managerRestaurant/orders/index', [ManagerRestaurantController::class, 'orders'])->name('managerRestaurant.orders.index');
         Route::put('/managerRestaurant/orders/complete/{orderId}', [ManagerRestaurantController::class, 'completeOrder'])->name('managerRestaurant.orders.complete');
-        Route::get('/managerRestaurant/codePromo/index', [ManagerRestaurantController::class, 'codePromo'])->name('managerRestaurant.codePromo.index');
-        Route::get('/managerRestaurant/codePromo/create', [ManagerRestaurantController::class, 'codePromoCreate'])->name('managerRestaurant.codePromo.create');
-        Route::post('/managerRestaurant/codePromo/create', [ManagerRestaurantController::class, 'codePromoStore'])->name('managerRestaurant.codePromo.store');
+        
+        Route::get('/managerRestaurant/codePromo/index', [PromoCodeController::class, 'index'])->name('managerRestaurant.codePromo.index');
+        Route::get('/managerRestaurant/codePromo/create', [PromoCodeController::class, 'create'])->name('managerRestaurant.codePromo.create');
+        Route::post('/managerRestaurant/codePromo/create', [PromoCodeController::class, 'store'])->name('managerRestaurant.codePromo.store');
+
+        
         
     });
 });
