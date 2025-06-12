@@ -90,7 +90,10 @@ Route::middleware('auth')->group(function () {
         Route::post('/managerRestaurant/items/create', [ItemController::class, 'storeManagerRestaurant'])->name('managerRestaurant.items.store');
         Route::get('/managerRestaurant/orders/index', [ManagerRestaurantController::class, 'orders'])->name('managerRestaurant.orders.index');
         Route::put('/managerRestaurant/orders/complete/{orderId}', [ManagerRestaurantController::class, 'completeOrder'])->name('managerRestaurant.orders.complete');
-
+        Route::get('/managerRestaurant/codePromo/index', [ManagerRestaurantController::class, 'codePromo'])->name('managerRestaurant.codePromo.index');
+        Route::get('/managerRestaurant/codePromo/create', [ManagerRestaurantController::class, 'codePromoCreate'])->name('managerRestaurant.codePromo.create');
+        Route::post('/managerRestaurant/codePromo/create', [ManagerRestaurantController::class, 'codePromoStore'])->name('managerRestaurant.codePromo.store');
+        
     });
 });
 

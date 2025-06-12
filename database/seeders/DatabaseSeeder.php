@@ -43,13 +43,10 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('Pokemon72380'),
         ]);
     
-        // Création des catégories d'abord
         Category::factory(30)->create();
     
-        // Récupérer tous les IDs des catégories existantes
         $categoryIds = Category::pluck('id')->toArray();
     
-        // Créer les items en s'assurant qu'ils utilisent un category_id valide
         Item::factory(50)->make()->each(function ($item) use ($categoryIds) {
             $item->category_id = $categoryIds[array_rand($categoryIds)];
             $item->save();
