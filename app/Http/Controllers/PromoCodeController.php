@@ -9,25 +9,21 @@ use Illuminate\Support\Facades\Auth;
 
 class PromoCodeController extends Controller
 {
-    // Affiche la liste des produits selon le rôle : admin voit tout, manager voit ceux de son restaurant
     public function index()
     {
         $restaurant_id = Auth::user()->restaurant_id;
 
         if (is_null($restaurant_id)) {
-            // Admin : tous les produits avec leur catégorie
             return view('promoCodes.index', [
                 'codePromo' => PromoCode::with('category')->get()
             ]);
         }
 
-        // Manager : uniquement les produits de son restaurant
         return view('managerRestaurant.promoCodes.index', [
             'codePromo' => PromoCode::where('restaurant_id', $restaurant_id)->with('category')->get()
         ]);
     }
 
-    // Affiche le formulaire de création de produit (admin)
     public function create()
     {
         return view('promoCodes.create', [
