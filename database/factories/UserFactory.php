@@ -31,6 +31,7 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'role' => 'client',
             'restaurant_id' => null,
+            'num_telephone' => $this->faker->numerify('0#########'), 
         ];
     }
 

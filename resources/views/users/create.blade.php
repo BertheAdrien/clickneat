@@ -25,6 +25,10 @@
                                 <input type="password" id="password" name="password" class="form-control" placeholder="Mot de passe" required>
                             </div>
                             <div class="mb-3">
+                                <label for="num_telephone" class="form-label">Numéro de téléphone :</label>
+                                <input type="text" id="num_telephone" name="num_telephone" class="form-control" placeholder="Numéro de téléphone" required>
+                            </div>
+                            <div class="mb-3">
                                 <label for="role" class="form-label">Role :</label>
                                 <select name="role" id="role" class="form-control">
                                     <option value="admin">Admin</option>
