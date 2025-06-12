@@ -19,6 +19,9 @@
           <li class="nav-item active">
             <a href="{{ route('client.dashboard') }}" class="nav-link">Home</a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('client.historic') }}" class="nav-link">Historique</a>
+          </li>
         </ul>
       </div>
       

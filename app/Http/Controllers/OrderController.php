@@ -150,6 +150,15 @@ class OrderController extends Controller
         // }
         return view('client.orders.index', compact('order'));
     }
+
+    public function historic()
+    {
+        $orders = Order::where('user_id', Auth::id())
+                       ->orderBy('created_at', 'desc')
+                       ->get();
+    
+        return view('client.historic', compact('orders'));
+    }
     
     /**
      * Récupérer ou créer une commande en cours pour l'utilisateur

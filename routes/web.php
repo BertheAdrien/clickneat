@@ -68,6 +68,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/client/cart', [OrderController::class, 'validateOrder'])->name('order.validateOrder');
         Route::delete('/order/removeItem/{id}', [OrderController::class, 'removeItem'])->name('order.removeItem');
         Route::get('/client/orders/show/{id}', [OrderController::class, 'show'])->name('client.orders.show');
+        Route::get('/client/historic', [OrderController::class, 'historic'])->name('client.historic');
     });
 
     Route::middleware('role:restaurant')->group(function () {

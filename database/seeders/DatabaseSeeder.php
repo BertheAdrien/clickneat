@@ -46,9 +46,9 @@ class DatabaseSeeder extends Seeder
 
         //combien de lignes à créer
 
-        Category::factory(80)->create();
+        Category::factory(30)->create();
 
-        Item::factory(400)->create();
+        Item::factory(50)->create();
     }
 
 
