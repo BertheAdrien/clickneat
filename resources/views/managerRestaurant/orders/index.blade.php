@@ -33,6 +33,7 @@
                                     <th>Date</th>
                                     <th>Total</th>
                                     <th>Notes</th>
+                                    <th>Téléphone</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -44,6 +45,7 @@
                                         <td>{{ $order->created_at->format('d/m/Y H:i') }}</td>
                                         <td>{{ $order->total_price }} €</td>
                                         <td>{{ $order->notes }}</td>
+                                        <td>{{ $order->user->num_telephone }}</td>
                                         <td>
                                             <div class="btn-group">
                                                 <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#orderDetails{{ $order->id }}">
