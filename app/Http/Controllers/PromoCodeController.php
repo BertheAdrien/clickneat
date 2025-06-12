@@ -17,13 +17,13 @@ class PromoCodeController extends Controller
         if (is_null($restaurant_id)) {
             // Admin : tous les produits avec leur catégorie
             return view('promoCodes.index', [
-                'promoCodes' => PromoCode::with('category')->get()
+                'codePromo' => PromoCode::with('category')->get()
             ]);
         }
 
         // Manager : uniquement les produits de son restaurant
         return view('managerRestaurant.promoCodes.index', [
-            'promoCodes' => PromoCode::where('restaurant_id', $restaurant_id)->with('category')->get()
+            'codePromo' => PromoCode::where('restaurant_id', $restaurant_id)->with('category')->get()
         ]);
     }
 
