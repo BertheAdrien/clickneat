@@ -16,9 +16,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-
         Restaurant::factory(25)->create();
-
+    
         User::factory()->create([
             'name' => 'Admin',
             'email' => 'admin@yahoo.fr',
@@ -38,18 +37,24 @@ class DatabaseSeeder extends Seeder
             'restaurant_id' => 1,
             'password' => Hash::make('Pokemon72380'),
         ]);
-
+    
         User::factory(10)->create([
             'role' => 'client',
             'password' => Hash::make('Pokemon72380'),
         ]);
-
-        //combien de lignes à créer
-
+    
+        // Création des catégories d'abord
         Category::factory(30)->create();
-
-        Item::factory(50)->create();
+    
+        // Récupérer tous les IDs des catégories existantes
+        $categoryIds = Category::pluck('id')->toArray();
+    
+        // Créer les items en s'assurant qu'ils utilisent un category_id valide
+        Item::factory(50)->make()->each(function ($item) use ($categoryIds) {
+            $item->category_id = $categoryIds[array_rand($categoryIds)];
+            $item->save();
+        });
     }
 
-
 }
+
